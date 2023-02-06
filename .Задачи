@@ -1,190 +1,52 @@
-//Задача1
-Console.WriteLine($"\nВведите размер массива m x n");
-int m = InputNumbers("Введите m: ");
-int n = InputNumbers("Введите n: ");
-int range = InputNumbers("Введите диапазон: от 1 до ");
+// Задача1
+// System.Console.WriteLine("Введите число:");
+// int N = int.Parse(Console.ReadLine()!);
 
-int[,] array = new int[m, n];
-CreateArray(array);
-WriteArray(array);
+// System.Console.WriteLine(PrintNumebers(N,1));
 
-Console.WriteLine($"\nОтсортированный массив: ");
-OrderArrayLines(array);
-WriteArray(array);
-
-void OrderArrayLines(int[,] array)
-{
-  for (int i = 0; i < array.GetLength(0); i++)
-  {
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-      for (int k = 0; k < array.GetLength(1) - 1; k++)
-      {
-        if (array[i, k] < array[i, k + 1])
-        {
-          int temp = array[i, k + 1];
-          array[i, k + 1] = array[i, k];
-          array[i, k] = temp;
-        }
-      }
-    }
-  }
-}
-
-int InputNumbers(string input)
-{
-  Console.Write(input);
-  int output = Convert.ToInt32(Console.ReadLine());
-  return output;
-}
-
-void CreateArray(int[,] array)
-{
-  for (int i = 0; i < array.GetLength(0); i++)
-  {
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-      array[i, j] = new Random().Next(range);
-    }
-  }
-}
-
-void WriteArray(int[,] array)
-{
-  for (int i = 0; i < array.GetLength(0); i++)
-  {
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-      Console.Write(array[i, j] + " ");
-    }
-    Console.WriteLine();
-  }
-}
-
-
-//Задача2
-Console.WriteLine($"\nВведите размер массива m x n ");
-int m = InputNumbers("Введите m: ");
-int n = InputNumbers("Введите n: ");
-int range = InputNumbers("Введите диапазон: от 1 до ");
-
-int[,] array = new int[m, n];
-CreateArray(array);
-WriteArray(array);
-
-int minSumLine = 0;
-int sumLine = SumLineElements(array, 0);
-for (int i = 1; i < array.GetLength(0); i++)
-{
-  int tempSumLine = SumLineElements(array, i);
-  if (sumLine > tempSumLine)
-  {
-    sumLine = tempSumLine;
-    minSumLine = i;
-  }
-}
-
-Console.WriteLine($"\n{minSumLine+1} - строкa с наименьшей суммой ({sumLine}) элементов ");
-
-
-int SumLineElements(int[,] array, int i)
-{
-  int sumLine = array[i,0];
-  for (int j = 1; j < array.GetLength(1); j++)
-  {
-    sumLine += array[i,j];
-  }
-  return sumLine;
-}
-
-int InputNumbers(string input)
-{
-  Console.Write(input);
-  int output = Convert.ToInt32(Console.ReadLine());
-  return output;
-}
-
-void CreateArray(int[,] array)
-{
-  for (int i = 0; i < array.GetLength(0); i++)
-  {
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-      array[i, j] = new Random().Next(range);
-    }
-  }
-}
+// string PrintNumebers(int start, int end)
+// {
+//     if(start==end) return start.ToString();
+//     return(start +" "+ PrintNumebers(start-1,end));
+// }
 
 
 
+// Задача2
+//  int GetSumBetweenNandM(int m, int n)
+// {
+//     if (n > m)
+//         return n + GetSumBetweenNandM(m, n - 1);
+//     return m;
+// }
+// Console.Write("Введите число m: ");
+// int m = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Введите число n: ");
+// int n = Convert.ToInt32(Console.ReadLine());
+// int result = GetSumBetweenNandM(m, n);
+// Console.WriteLine($"Сумма чисел от {m} до {n} равна {result}"); 
 
-//Задача3
-Console.WriteLine($"\nВведите размер массива X x Y x Z:");
-int x = InputNumbers("Введите X: ");
-int y = InputNumbers("Введите Y: ");
-int z = InputNumbers("Введите Z: ");
-Console.WriteLine($"");
 
-int[,,] array3D = new int[x, y, z];
-CreateArray(array3D);
-WriteArray(array3D);
+// Задача3
+// System.Console.WriteLine("Введите число:");
+// int n = int.Parse(Console.ReadLine()!);
 
-int InputNumbers(string input)
-{
-  Console.Write(input);
-  int output = Convert.ToInt32(Console.ReadLine());
-  return output;
-}
+// System.Console.WriteLine("Введите число:");
+// int m = int.Parse(Console.ReadLine()!);
 
-void WriteArray (int[,,] array3D)
-{
-  for (int i = 0; i < array3D.GetLength(0); i++)
-  {
-    for (int j = 0; j < array3D.GetLength(1); j++)
-    {
-      Console.Write($"X({i}) Y({j}) ");
-      for (int k = 0; k < array3D.GetLength(2); k++)
-      {
-        Console.Write( $"Z({k})={array3D[i,j,k]}; ");
-      }
-      Console.WriteLine();
-    }
-    Console.WriteLine();
-  }
-}
 
-void CreateArray(int[,,] array3D)
-{
-  int[] temp = new int[array3D.GetLength(0) * array3D.GetLength(1) * array3D.GetLength(2)];
-  int  number;
-  for (int i = 0; i < temp.GetLength(0); i++)
-  {
-    temp[i] = new Random().Next(10, 100);
-    number = temp[i];
-    if (i >= 1)
-    {
-      for (int j = 0; j < i; j++)
-      {
-        while (temp[i] == temp[j])
-        {
-          temp[i] = new Random().Next(10, 100);
-          j = 0;
-          number = temp[i];
-        }
-          number = temp[i];
-      }
-    }
-  }
-  int count = 0; 
-  for (int x = 0; x < array3D.GetLength(0); x++)
-  {
-    for (int y = 0; y < array3D.GetLength(1); y++)
-    {
-      for (int z = 0; z < array3D.GetLength(2); z++)
-      {
-        array3D[x, y, z] = temp[count];
-        count++;
-      }
-    }
-  }
-}
+//  int AkkermanFunc(int m, int n)
+// 		{
+// 			if(m == 0)
+// 			{
+// 				return n + 1;
+// 			}
+// 			if(m > 0 && n == 0)
+// 			{
+// 				return AkkermanFunc(m - 1, 1);
+// 			}
+// 			return AkkermanFunc(m - 1, AkkermanFunc(m, n - 1));
+// 		}
+		
+// 		Console.WriteLine(AkkermanFunc(n,m));
+
