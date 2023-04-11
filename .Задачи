@@ -375,3 +375,124 @@ else:
 # print_operation_table(lambda x, y: x * y)
 
 
+SEMINAR 8 HOMEWORK
+Задача 38: Дополнить телефонный справочник возможностью изменения и удаления данных. Пользователь также может ввести имя или фамилию,
+и Вы должны реализовать функционал для изменения и удаления данных
+
+def read_file(filename):
+    with open(filename, 'r') as data:     
+        data_array = []                   
+        for line in data:                  
+            item = line.replace('\n','').split(sep = ',')    #replace(\n) сделали чтоб не было пустых строк
+            data_array.append(item)   
+    
+    return data_array #эта функция для чтения файла, и возврашает массив
+
+
+def write_file(filename, data_array):  #перезаписывает даннные
+    with open(filename, 'w') as data:    #перезаписывает даннные
+        for i in data_array:                 
+            write_element = ', '.join(i) # сделали чтоббыло не слитно1
+            data.write(f'{write_element}\n')
+
+
+def add_item(filename , lastname = '', firstname = '', secondname = '', phone = ''):
+    data_array = read_file(filename) # получили через функцию
+    max_id = 0
+    for i in range(1,len(data_array)):
+        if max_id < int(data_array[i][0]): 
+            max_id = int(data_array[i][0]) # узнаем мах ид
+    next_id = max_id + 1
+    lastname = input('Фамилия ')
+    firstname = input('Имя ')
+    secondname = input('Отчество ')
+    phone = input('Номер телефона ')
+    new_item = []
+    new_item.append(str(next_id))
+    new_item.append(lastname)
+    new_item.append(firstname)
+    new_item.append(secondname)
+    new_item.append(phone)
+    data_array.append(new_item) #создали новый массив с новымы данными теперь его надо добавить  в текст
+    write_file(filename, data_array)
+
+def show_all_items(filename):
+    data_array = read_file(filename) # получили через функцию
+    # with open(filename, 'r') as data:     #1
+    #     data_array = []                    #2
+    #     for line in data:                  #3    все это можно в отдельную функцию (def read_file)
+    #         item = line.split(sep = ',')    #4
+    #         data_array.append(item)         #5
+    for i in range(1,len(data_array)):#здесь мы заставили пропустить 1 строку начав с 2 засунув в массив(массив в массиве) и обратившись к 1 индексу
+            print("ID:", data_array[i][0], "Фамилия:",data_array[i][1], "Имя:", data_array[i][2], "Отчество:", data_array[i][3], "Телефон:", data_array[i][4],)
+                        #двумерный масив поэтому мв обрашаемся к 2 индексам
+
+def search(filename):
+    name = input('Что искать ') 
+    with open(filename, 'r') as data:
+        for line in data:
+            if name in line:
+                print(line)  
+
+def replace_item(filename):
+    name2 = input('Что заменить?  ') 
+    with open(filename, 'r') as data:
+        for line in data:
+            old_data = data.read()
+    new_data = old_data.replace(name2, input('Заменить на что? '))
+    with open(filename, 'w') as data:
+        data.write(new_data)
+        print('Замена выполнено')
+
+import re          
+
+def del_item(data):
+    name3 = input('Что ')  
+    with open(filename, 'r' ) as data:
+        lines = data.readlines()
+    
+    pattern = re.compile(re.escape(name3))
+    with open(filename, 'w' ) as data:
+        for line in lines:
+            result = pattern.search(line)
+            if result is None:
+                data.write(line)
+                print("Строка удалена")
+                
+
+                              
+
+def menu():
+ 
+
+    print('Добро пожаловать в справочник')
+    print("1 - Показать все записи")
+    print("2 - Добавить запись")
+    print('3 - Пойск ')
+    print('4 - Изменит')
+    print('5 - Удалить')
+    user_operation = int(input()) 
+
+
+    if user_operation == 1 :
+        show_all_items(filename)
+    elif user_operation == 2:
+        add_item(filename)
+    elif user_operation == 3:
+        search(filename)
+    elif user_operation == 4:
+        replace_item(filename)
+    elif user_operation == 5:
+        del_item(filename)
+
+data = ('file.txt')
+filename = 'file.txt'
+
+menu()
+
+
+
+
+
+
+
