@@ -447,7 +447,7 @@ def replace_item(filename):
 import re          
 
 def del_item(data):
-    name3 = input('Что ')  
+    name3 = input('Слово в строке ')  
     with open(filename, 'r' ) as data:
         lines = data.readlines()
     
